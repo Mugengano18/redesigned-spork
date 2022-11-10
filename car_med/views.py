@@ -74,7 +74,7 @@ def retail_registration(request):
     return render(request, 'shop_register.html', {'form': form})
 
 
-@login_required(login_url='login')
+
 def get_retail_information(request):
     if request.method == 'POST':
         # make requests from api.ipify.org
