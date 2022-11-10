@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Document</title>
+
+    {% load static%}
+<!--    <link href="{% static 'css/style.css'%}" rel="stylesheet" />-->
+    <style>
+      *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --min-opacity : .5;
+    --max-opacity : 1;
+    --aqua :#fb9419;
+    --black:#ffffff;
+    --body-color:rgb(255, 255, 255);
+
+
+}
+.form_container{
+    background-color: var(--body-color);
+    min-height: 100vh;
+    min-width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form_container .form_center{
+    min-height: 80vh;
+    width: 80vw;
+    min-width: 760px;
+    display: flex;
+    box-shadow: 6px 6px 6px#696663;
+}
+
+/* left part of the page */
+.form_center .form_left_part{
+    background-color: var(--aqua);
+    width: 50%;
+    padding: 1rem;
+
+}
+
+
+/* right paft of the form */
+.form_center .form_right_part{
+    width: 50%;
+    background-color: var(--black);
+    padding: 1rem 1rem 1rem 4rem;
+    color: white;
+}
+
+
+/* right topp button */
+.uper_button{
+    width: 8rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+    margin-left: auto;
+}
+.uper_button button{
+    border: none;
+    background-color: transparent;
+}
+.uper_button .first{
+    background-color: rgb(65, 63, 63);
+    color: white;
+    height: 100%;
+    width: 110%;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+.uper_button .second{
+    background-color: var(--aqua);
+    color:white;
+    height: 100%;
+    width: 100%;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+/* end of right top button */
+
+
+/* sign in and sign up place */
+.sigin_and_signup p{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+    font-size: larger;
+    opacity: var(--min-opacity);
+}
+.sigin_and_signup p:nth-child(2){
+    font-size: small;
+}
+.sigin_and_signup p:first-child:hover,.sigin_and_signup p:last-child:hover{
+    text-decoration: underline solid white  1px;
+    opacity: var(--max-opacity);
+    cursor: pointer;
+
+}
+/* end of signup button */
+
+
+/* form inputs */
+.form_input{
+    margin-right: 1rem;
+}
+.form_input label{
+    display: block;
+    text-transform: capitalize;
+    margin: 1rem  0 .1rem 0;
+}
+.form_input input{
+    width: 100%;
+    background-color: transparent;
+    height: 2rem;
+    border: none;
+    outline: none;
+    border-bottom: solid rgb(11, 11, 11) 2px;
+    color: rgb(0, 0, 0);
+}
+/* end of form inputs */
+
+
+
+
+.signup-button{
+    margin-top: 30px;
+}
+
+/* down button */
+.signup-button button{
+    width: 8rem;
+    height: 2rem;
+    border-radius: 1rem;
+    border: none;
+    outline: none;
+    background-color: var(--aqua);
+    color: rgb(0, 0, 0);
+}
+.signup-button label{
+    margin-left: 1rem;
+    opacity: var(--min-opacity);
+}
+
+
+.signin_signin{
+    display: none;
+}
+
+/* end of down button */
+
+
+/* log in form */
+.reduce_gap{
+    margin: 7rem 0 3rem 0;
+}
+
+
+/* javascript css */
+
+    </style>
+  </head>
+  <body>
+    <div class="form_container">
+      <div class="form_center">
+        <div class="form_left_part"></div>
+
+        <div class="form_right_part">
+          <!--uper button -->
+          <div class="uper_button">
+            <button class="first signin_page">Login</button>
+            <button class="second signup_page">Sign Up</button>
+          </div>
+          {% for message in messages %}
+
+          <div class="alert alert-danger">
+            <a class="close" href="#" data-dismiss="alert">×</a>
+            {{ message }}
+          </div>
+
+          {% endfor %}
+          <!-- log in form -->
+          <form
+            class="needs-validation"
+            action="{% url 'login' %}"
+            method="POST"
+          >
+            {% csrf_token %}
+            <div class="login_form">
+              <div class="form_input reduce_gap">
+                <label for="">phone</label>
+                <input
+                  name="phone"
+                  type="tel"
+                  placeholder="078-5675-567"
+                  pattern="[0-9]{10}"
+                  required
+                />
+                <label for="">password</label>
+                <input
+                  name="pass1"
+                  placeholder="Enter Password"
+                  type="password"
+                  required
+                />
+              </div>
+
+              <div class="signin signup-button">
+                <button type="submit">Login</button>
+              </div>
+            </div>
+          </form>
+
+          <!-- end of login form -->
+
+          <!-- sign up form -->
+          <form
+            action="{% url 'signup' %}"
+            class="needs-validation"
+            method="POST"
+          >
+            {% csrf_token %}
+            <div class="signin_signin">
+              <div class="form_input">
+                <label for="">First name</label>
+                <input
+                  name="fname"
+                  placeholder="Enter your Firstname"
+                  type="text"
+                  required
+                />
+
+                <label for="">last name</label>
+                <input
+                  name="lname"
+                  placeholder="Enter your Lastname"
+                  type="text"
+                  required
+                />
+
+                <label for="">phone Number</label>
+                <input
+                  name="phone"
+                  type="tel"
+                  placeholder="078-5675-567"
+                  pattern="[0-9]{10}"
+                  required
+                />
+
+                <label for="">password</label>
+                <input name="pass1" placeholder="password" type="password" required />
+
+                <label for="">confirm Password </label>
+                <input
+                  name="pass2"
+                  placeholder="confirm password"
+                  type="password"
+                  required
+                />
+              </div>
+
+              <div class="signup-button">
+                <button class="sinup" type="submit">Sign Up</button>
+                <label>I'm already member</label>
+              </div>
+            </div>
+          </form>
+
+          <!-- end of sign up form -->
+        </div>
+      </div>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+  </body>
+</html>

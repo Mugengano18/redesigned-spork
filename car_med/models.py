@@ -8,6 +8,8 @@ class Retail_information(models.Model):
     latitude = models.FloatField(default=0)
     longitude = models.FloatField(default=0)
     city = models.CharField(max_length=30, null=True, blank=True)
+    sector = models.CharField(max_length=50, null=True, blank=True)
+    cell = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
         return self.company_name
